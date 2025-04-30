@@ -3,9 +3,9 @@ require('dotenv').config();
 const API_KEY = process.env.API_KEY;
 
 // movies by genre
-async function fetchMoviesByGenre(genre = 'all', searchTerm = '', page = 1) {
+async function fetchMoviesByGenre(genre = 'all', searchTerm = '') {
   try {
-    const url = `http://localhost:3000/api/movies?s=${searchTerm || genre}&type=movie&page=${page}`;
+    const url = `http://localhost:3000/api/movies?s=${searchTerm || genre}&type=movie`;
     const response = await fetch(url);
 
     if (!response.ok) {

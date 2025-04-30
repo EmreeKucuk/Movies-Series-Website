@@ -16,10 +16,10 @@ if (!API_KEY) {
 }
 
 app.get('/api/movies', async (req, res) => {
-  const { s, i, type, page } = req.query; // Add 'page' parameter
+  const { s, i, type } = req.query;
 
   try {
-    const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${s || ''}&i=${i || ''}&type=${type || 'movie'}&page=${page || 1}`;
+    const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${s || ''}&i=${i || ''}&type=${type || 'movie'}`;
     const response = await axios.get(url);
     res.json(response.data);
   } catch (error) {

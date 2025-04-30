@@ -167,20 +167,4 @@ header .subtitle {
   background-color: #008000af;
 }
 
-.load-more-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.load-more-btn:hover {
-  background-color: #0056b3;
-}
-
 
