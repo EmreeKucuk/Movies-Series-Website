@@ -4,31 +4,44 @@ const movieGrid = document.getElementById('movieGrid');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 
+let currentPage = 1; // Track the current page
+let currentGenre = 'all'; // Track the current genre
+let currentSearchTerm = ''; // Track the current search term
+
+const loadMoreBtn = document.createElement('button');
+loadMoreBtn.textContent = 'Load More';
+loadMoreBtn.classList.add('load-more-btn');
+loadMoreBtn.addEventListener('click', async () => {
+  currentPage++;
+  const movies = await fetchMoviesByGenre(currentGenre, currentSearchTerm, currentPage);
+  movies.forEach(createMovieCard);
+});
+
 // create movie cards
 async function createMovieCard(movie) {
   const card = document.createElement('div');
   card.classList.add('movie-card');
-  card.dataset.imdbid = movie.imdbID; // store imdbID in the card's dataset
-  
+  card.dataset.imdbid = movie.imdbID;
+
   const image = document.createElement('img');
   image.src = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/250';
   card.appendChild(image);
-  
+
   const content = document.createElement('div');
   content.classList.add('card-content');
-  
+
   const title = document.createElement('h3');
   title.textContent = movie.Title;
   content.appendChild(title);
-  
+
   const year = document.createElement('p');
   year.textContent = `Year: ${movie.Year}`;
   content.appendChild(year);
-  
+
   const rating = document.createElement('p');
   rating.classList.add('rating');
-  rating.textContent = 'Rating: Loading...'; 
-  
+  rating.textContent = 'Rating: Loading...';
+
   try {
     const fullMovieDetails = await fetchMovieDetails(movie.imdbID);
     rating.textContent = `Rating: ${getMovieRating(fullMovieDetails)}`;
@@ -36,15 +49,16 @@ async function createMovieCard(movie) {
     console.error('Error fetching movie details for rating:', error);
     rating.textContent = 'Rating: N/A';
   }
-  
+
   content.appendChild(rating);
-  
+
   const favoriteBtn = document.createElement('button');
   favoriteBtn.classList.add('favorite-btn');
   favoriteBtn.textContent = 'Add to Favorites';
   favoriteBtn.addEventListener('click', () => toggleFavorite(movie, favoriteBtn));
+  setFavoriteButtonState(movie, favoriteBtn); // Ensure button state is set
   content.appendChild(favoriteBtn);
-  
+
   card.appendChild(content);
   movieGrid.appendChild(card);
 }
@@ -80,32 +94,38 @@ function setFavoriteButtonState(movie, button) {
 genreButtons.forEach(button => {
   button.addEventListener('click', async () => {
     genreButtons.forEach(btn => btn.classList.remove('active'));
-    
     button.classList.add('active');
-    
-    const genre = button.dataset.genre;
-    const searchTerm = searchInput.value.trim();
-    
+
+    currentGenre = button.dataset.genre;
+    currentSearchTerm = searchInput.value.trim();
+    currentPage = 1;
+
     movieGrid.innerHTML = ''; // Clear current movies
-    
-    const movies = await fetchMoviesByGenre(genre, searchTerm);
+    const movies = await fetchMoviesByGenre(currentGenre, currentSearchTerm, currentPage);
     movies.forEach(createMovieCard);
+
+    if (!movieGrid.contains(loadMoreBtn)) {
+      movieGrid.parentElement.appendChild(loadMoreBtn);
+    }
   });
 });
 
 // search button
 searchBtn.addEventListener('click', async () => {
-  const searchTerm = searchInput.value.trim();
-  
-  if (searchTerm === '') {
+  currentSearchTerm = searchInput.value.trim();
+  if (currentSearchTerm === '') {
     alert('Please enter a movie name to search');
     return;
   }
-  
-  movieGrid.innerHTML = ''; 
-  
-  const movies = await fetchMoviesByGenre('all', searchTerm);
+
+  currentPage = 1;
+  movieGrid.innerHTML = ''; // Clear current movies
+  const movies = await fetchMoviesByGenre(currentGenre, currentSearchTerm, currentPage);
   movies.forEach(createMovieCard);
+
+  if (!movieGrid.contains(loadMoreBtn)) {
+    movieGrid.parentElement.appendChild(loadMoreBtn);
+  }
 });
 
 // initial popular movies
