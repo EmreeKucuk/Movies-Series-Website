@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header .logo {
+  margin-bottom: 10px;
+}
+
+header .film-icon {
+  width: 48px;
+  height: 48px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+header .subtitle {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+#searchInput {
+  padding: 10px;
+  font-size: 1.2em;
+  margin-right: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#searchBtn {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#searchBtn:hover {
+  background-color: #0056b3;
+}
+
+#sortBtn {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#sortBtn:hover {
+  background-color: #218838;
+}
+
+.genres {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.genre-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.genre-btn.active {
+  background-color: #0056b3;
+}
+
+.recommendations h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.movie-card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+}
+
+.movie-card .card-content {
+  padding: 15px;
+}
+
+.movie-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.movie-card p {
+  font-size: 1em;
+  color: #555;
+}
+
+.movie-card .rating {
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+.movie-card .favorite-btn {
+  padding: 5px 10px;
+  font-size: 1em;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movie-card .favorite-btn.active {
+  background-color: #008000;
+}
+
+.movie-card .favorite-btn:hover {
+  background-color: #008000af;
+}
+
+

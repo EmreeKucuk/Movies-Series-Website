@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Recommendations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="film-icon">
+          <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+          <line x1="7" y1="2" x2="7" y2="22"></line>
+          <line x1="17" y1="2" x2="17" y2="22"></line>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <line x1="2" y1="7" x2="7" y2="7"></line>
+          <line x1="2" y1="17" x2="7" y2="17"></line>
+          <line x1="17" y1="17" x2="22" y2="17"></line>
+          <line x1="17" y1="7" x2="22" y2="7"></line>
+        </svg>
+      </div>
+      <h1>Movie Recommendations</h1>
+      <p class="subtitle">Select your preferred genre and get personalized movie suggestions</p>
+    </header>
+    
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search for a movie...">
+      <button id="searchBtn">Search</button>
+      <button id="sortBtn">Sort by Rating</button> 
+    </div>
+
+    <nav class="genres">
+      <button class="genre-btn active" data-genre="all">All</button>
+      <button class="genre-btn" data-genre="action">Action</button>
+      <button class="genre-btn" data-genre="comedy">Comedy</button>
+      <button class="genre-btn" data-genre="drama">Drama</button>
+      <button class="genre-btn" data-genre="horror">Horror</button>
+      <button class="genre-btn" data-genre="romance">Romance</button>
+      <button class="genre-btn" data-genre="sci-fi">Sci-Fi</button>
+      <button class="genre-btn" data-genre="thriller">Thriller</button>
+    </nav>
+
+    <section class="recommendations">
+      <h2>Recommended movies for you</h2>
+      <div id="movieGrid" class="movie-grid">
+      </div>
+    </section>
+  </div>
+  <script src="movies.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
