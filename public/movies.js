@@ -1,8 +1,6 @@
-require('dotenv').config();
+const API_KEY = '8423f33a';  // Buraya gerçek API anahtarınızı yazın
 
-const API_KEY = process.env.API_KEY;
-
-// movies by genre
+// Genre'ye göre filmleri çekme
 async function fetchMoviesByGenre(genre = 'all', searchTerm = '') {
   try {
     const url = `http://localhost:3000/api/movies?s=${searchTerm || genre}&type=movie`;
@@ -26,7 +24,7 @@ async function fetchMoviesByGenre(genre = 'all', searchTerm = '') {
   }
 }
 
-// movie details by ID
+// Film detaylarını ID ile çekme
 async function fetchMovieDetails(movieId) {
   try {
     const url = `http://localhost:3000/api/movies?i=${movieId}`;
@@ -45,12 +43,13 @@ async function fetchMovieDetails(movieId) {
   }
 }
 
+// Film değerlendirmesini almak
 function getMovieRating(movie) {
   if (movie.imdbRating && movie.imdbRating !== 'N/A') {
     return movie.imdbRating;
   }
-  
-  // missing rating
+
+  // Eksik değerlendirme
   if (movie.Ratings && movie.Ratings.length > 0) {
     const imdbRating = movie.Ratings.find(rating => rating.Source === "Internet Movie Database");
     if (imdbRating) return imdbRating.Value;
