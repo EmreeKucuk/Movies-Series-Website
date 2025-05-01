@@ -19,7 +19,7 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-// OMDb API proxy endpoint
+// OMDb API endpoint
 app.get('/api/movies', async (req, res) => {
   const { s, i, type } = req.query;
 
@@ -33,7 +33,7 @@ app.get('/api/movies', async (req, res) => {
   }
 });
 
-// 404 fallback 
+// 404 
 app.use((req, res) => {
   res.status(404).send('404.');
 });

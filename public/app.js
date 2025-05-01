@@ -1,11 +1,11 @@
-// DOM öğelerini seçme
+
 const genreButtons = document.querySelectorAll('.genre-btn');
 const movieGrid = document.getElementById('movieGrid');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const sortBtn = document.getElementById('sortBtn');
 
-// Film kartı oluşturma fonksiyonu
+
 async function createMovieCard(movie) {
   const card = document.createElement('div');
   card.classList.add('movie-card');
@@ -50,7 +50,7 @@ async function createMovieCard(movie) {
   movieGrid.appendChild(card);
 }
 
-// Favori ekleme ve kaldırma
+// add or remove from favorites
 function toggleFavorite(movie, button) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   
@@ -67,7 +67,7 @@ function toggleFavorite(movie, button) {
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-// Favori butonunu doğru şekilde ayarlama
+
 function setFavoriteButtonState(movie, button) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   if (favorites.some(fav => fav.imdbID === movie.imdbID)) {
@@ -76,7 +76,7 @@ function setFavoriteButtonState(movie, button) {
   }
 }
 
-// Genre butonlarına tıklama işlemi
+
 genreButtons.forEach(button => {
   button.addEventListener('click', async () => {
     genreButtons.forEach(btn => btn.classList.remove('active'));
@@ -85,14 +85,14 @@ genreButtons.forEach(button => {
     const genre = button.dataset.genre;
     const searchTerm = searchInput.value.trim();
     
-    movieGrid.innerHTML = ''; // Mevcut filmleri temizle
+    movieGrid.innerHTML = '';
     
     const movies = await fetchMoviesByGenre(genre, searchTerm);
     movies.forEach(createMovieCard);
   });
 });
 
-// Arama butonuna tıklama işlemi
+
 searchBtn.addEventListener('click', async () => {
   const searchTerm = searchInput.value.trim();
   
@@ -107,7 +107,7 @@ searchBtn.addEventListener('click', async () => {
   movies.forEach(createMovieCard);
 });
 
-// Sayfa yüklendiğinde favorileri kontrol etme
+// check favorites page loads
 window.addEventListener('load', () => {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
@@ -122,17 +122,17 @@ window.addEventListener('load', () => {
     }
   });
 
-  // Başlangıçta popüler filmleri yükle
+
   loadMovies();
 });
 
-// Filmleri yükleme fonksiyonu
+// load movies
 async function loadMovies() {
   const movies = await fetchMoviesByGenre('all');
   movies.forEach(createMovieCard);
 }
 
-// Filmleri IMDb puanına göre sıralama
+// sort IMDb rating
 sortBtn.addEventListener('click', async () => {
   const movieCards = Array.from(movieGrid.children);
 
@@ -147,10 +147,10 @@ sortBtn.addEventListener('click', async () => {
     })
   );
 
-  // Azalan sırayla sıralama
+  // sort in descending 
   moviesWithRatings.sort((a, b) => b.rating - a.rating);
 
-  // Temizleme
+  // clear 
   movieGrid.innerHTML = '';
   moviesWithRatings.forEach(({ card }) => movieGrid.appendChild(card));
 });
