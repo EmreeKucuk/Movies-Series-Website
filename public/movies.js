@@ -55,13 +55,13 @@ async function fetchMovieDetails(movieId) {
   }
 }
 
-// Film değerlendirmesini almak
+
 function getMovieRating(movie) {
   if (movie.imdbRating && movie.imdbRating !== 'N/A') {
     return movie.imdbRating;
   }
 
-  // Eksik değerlendirme
+
   if (movie.Ratings && movie.Ratings.length > 0) {
     const imdbRating = movie.Ratings.find(rating => rating.Source === "Internet Movie Database");
     if (imdbRating) return imdbRating.Value;

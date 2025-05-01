@@ -9,7 +9,7 @@ const PORT = 3000;
 
 app.use(cors());
 
-// Statik dosyaları sun (index.html, app.js, style.css vs)
+// Static (index.html, app.js, style.css vs)
 app.use(express.static(path.join(__dirname, 'public')));
 
 const API_KEY = process.env.API_KEY;
@@ -33,9 +33,9 @@ app.get('/api/movies', async (req, res) => {
   }
 });
 
-// 404 fallback (opsiyonel)
+// 404 fallback 
 app.use((req, res) => {
-  res.status(404).send('Sayfa bulunamadı.');
+  res.status(404).send('404.');
 });
 
 app.listen(PORT, () => {

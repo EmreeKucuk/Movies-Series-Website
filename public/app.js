@@ -9,7 +9,7 @@ const sortBtn = document.getElementById('sortBtn');
 async function createMovieCard(movie) {
   const card = document.createElement('div');
   card.classList.add('movie-card');
-  card.dataset.imdbid = movie.imdbID; // IMDb ID'sini kartın data attribute olarak ekle
+  card.dataset.imdbid = movie.imdbID; 
   
   const image = document.createElement('img');
   image.src = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/250';
